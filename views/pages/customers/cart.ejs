@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../../partials/head %>
+</head>
+<body>
+    <!-- leftpanel start -->
+    <!-- <aside id="left-panel" class="left-panel">
+        <div class="orders">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Cart</h4>
+                        </div>
+                        <div class="card-body--">
+                            adw
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside> -->
+    <!-- leftpanel end -->
+    
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/store_header %>
+        <!-- hearer end -->
+
+        <!-- left start -->
+        <!-- left end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <% if(empty == true){ %>
+                    <p>empty</p>
+                <% }else{ %>
+                <!-- cart start -->
+                <div class="orders">
+                    <div class="row">
+                        <div class="col-xl-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="box-title">Cart</h4>
+                                </div>
+                                <div class="card-body--">
+                                    
+                                    <div class="table-stats order-table ov-h">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th class="serial">#</th>
+                                                    <!-- <th class="avatar">Image</th> -->
+                                                    <th>Prodcts</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Total</th>
+                                                    <th>Option</th>                                 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody1">
+                                            <% var quant = 0; %>
+                                            <% var total = 0; %>
+                                            <% var sr = 1; %>
+                                            <% results.forEach(function(result, index){ %>
+                                                <% quant =quant + result.quantity; %>  
+                                                <% total =total + result.price * result.quantity; %>  
+                                            <% }) %>
+                                            <% results.forEach(function(result, index){ %>
+                                                
+                                                <tr>
+                                                    <td><%= sr %></td>
+                                                    <!-- <td class="avatar">
+                                                        <div class="round-img">
+                                                            <a href="#"><img class="rounded-circle" src="" alt=""></a>
+                                                        </div>
+                                                    </td> -->
+                                                    <td>
+                                                        <%= result.name %>
+                                                    </td>
+                                                    <td class="price"><%= result.price %></td>
+                                                    <td>
+                                                        <input class="cart_id" type="hidden" name="cart_id" value="<%= result.id %>">
+                                                        <input type="number" name="quantity" id="" max="100" min="1" value="<%= result.quantity %>" class="form-control quantity"> 
+                                                    </td>
+                                                    <td class="total_price">$<%= result.price * result.quantity %></td>
+                                                    <td>
+                                                        <a href="/store/delete/<%= result.id %>"><span class="badge badge-danger" onclick="return confirm('Are you sure you want to DELETE?')"><i class="fa fa-trash"></i></span></a>
+                                                    </td>
+                                                </tr>
+                                            <% sr++ %>
+                                            <% }) %>
+                                            </tbody>
+                                            <tbody id="tbody2">
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td id="total_quantity"><%= quant %> Items</td>
+                                                    <td id="total_payout">$<%= total %></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- /.table-stats -->
+                                </div>
+                            </div> <!-- /.card -->
+                        </div>  <!-- /.col-lg-8 -->
+
+                        <div class="col-xl-5">
+                            <div class="row">
+                                <div class="col-lg-6 col-xl-12">
+                                    <div class="card br-0">
+                                        <div class="card-body">
+                                            <h4 class="box-title">Place Order</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                            <% if(typeof address != 'undefined' && address[0] != null) { %>
+                                                <% address.forEach(function(address_v){ %>
+                                                    <p>Contact Name : <b><%= address_v.contact_name %></b></p>
+                                                    <p>Contact Number : <b><%= address_v.contact_number %></b></p>
+                                                    <p>Address : <b><%= address_v.address %></b></p>
+                                                    <p>State : <b><%= address_v.state %></b></p>
+                                                    <p>Zip Code : <b><%= address_v.zip_code %></b></p>
+                                                    <a href="/store/address/delete/<%= address_v.id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to DELETE?')">Delete Address</a>
+                                                <% }) %>
+                                            <% }else{ %>
+                                                <% include ../../partials/messages %>
+                                                <form action="/store/address" method="POST">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="contact_name" id="contact_name" value="<%= typeof contact_number != 'undefined' ? contact_number: '' %>" required placeholder="Contact Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" name="contact_number" id="contact_number" value="<%= typeof contact_name != 'undefined' ? contact_name: '' %>" required placeholder="Contact Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" name="address" id="address" value="<%= typeof address != 'undefined' ? address: '' %>" required placeholder="Address"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="state" id="state" value="<%= typeof state != 'undefined' ? state: '' %>" required placeholder="State">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" name="zip_code" id="zip_code" value="<%= typeof zip_code != 'undefined' ? zip_code: '' %>" required placeholder="Zip Code">
+                                                    </div>
+                                                    <button class="btn btn-warning btn-block">Place Order On This Address</button>
+                                                </form>
+                                            <% } %>
+                                            <br>
+                                            <br>
+                                            <form action="/store/pay" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p><b>Delivery Charge</b></p>
+                                                        <p><b>Total Pay</b></p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <% if(total >= 500){ %>
+                                                            <p style="color: green;">Free</p>
+                                                            <p>$<%= total %></p>
+                                                        <% }else{ %>
+                                                            <p style="color: red;">Paid $50</p>
+                                                            <p>$<%= total + 50 %> , <small><b>After Adding $50</b></small></p>
+                                                            
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-warning btn-block">Process To Pay And Place Order</button>
+                                                    <center><p style="color: blue;">Only Paypal</p></center>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </form>
+                                    </div><!-- /.card -->
+                                </div>
+                                
+                            </div>
+                        </div> <!-- /.col-md-4 -->
+                    </div>
+                </div>
+                <!-- cart end -->
+                <% } %>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(window).load(function() {
+            // var total = 0;
+            $(".quantity").change(function(){
+                var price = $(this).parent().parent('tr').find('.price').text();
+                var cart_id = $(this).siblings('.cart_id').val();
+                var quantity = $(this).val();
+                var pro_total = quantity * price;
+                total = total + pro_total;
+                $(this).parent().parent('tr').find('.total_price').text('$'+pro_total);
+
+                $.ajax({
+                    url: "/store/updatecart",
+                    type: 'POST',
+                    data: { cart_id : cart_id, quantity: quantity },
+                    success: function(result){
+                        // alert('quantity updated');
+                    },
+                    error: function(err){
+                        console.log('ajax error : '+err);
+                    }
+                });
+                location.reload(true);
+            });
+            $(".quantity").focusout(function(){
+                var price = $(this).parent().parent('tr').find('.price').text();
+                var cart_id = $(this).siblings('.cart_id').val();
+                var quantity = $(this).val();
+                var pro_total = quantity * price;
+                total = total + pro_total;
+                $(this).parent().parent('tr').find('.total_price').text('$'+pro_total);
+
+                $.ajax({
+                    url: "/store/updatecart",
+                    type: 'POST',
+                    data: { cart_id : cart_id, quantity: quantity },
+                    success: function(result){
+                        // alert('quantity updated');
+                        console.log(result);
+                    },
+                    error: function(err){
+                        console.log('ajax error : '+err);
+                    }
+                });
+                location.reload(true);
+            });
+        });
+        var total = 0;
+       
+                   
+        // console.log(total);
+    </script>
+    <!-- foot end -->
+</body>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/head %> 
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.css">
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/saller_leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/saller_header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Edit Product</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <form action="/myproducts/editproduct" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_name" class=" form-control-label">Product Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="pro_name" name="pro_name" placeholder="Product Name" class="form-control" value="<%= results[0].pro_name %>"></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_description" class=" form-control-label">Description</label></div>
+                                        <div class="col-12 col-md-9"><textarea name="pro_description" id="pro_description" rows="4" placeholder="Description..." class="form-control"><%= results[0].description %></textarea></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="select" class=" form-control-label">Select Category</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <select name="cat_id" id="select" class="form-control">
+                                                <option value="<%= results[0].cat_id %>"><%= results[0].cat_name %></option>
+                                                <% cat_results.forEach(function(item){ %>
+                                                <option value="<%= item.id %>"><%= item.name %></option>
+                                                <% }) %>  
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-1 ">
+                                        </div>
+                                    </div>    
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_stock" class=" form-control-label">Available Stock</label></div>
+                                        <div class="col-12 col-md-3"><input type="number" id="pro_stock" name="pro_stock" value="<%= results[0].stock %>" placeholder="Product Stock" class="form-control"></div>
+                                    </div> 
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_price" class=" form-control-label">Product Price</label></div>
+                                        <div class="col-12 col-md-3"><input type="number" id="pro_price" name="pro_price" value="<%= results[0].price %>" placeholder="Product Price" class="form-control"></div>
+                                    </div>                      
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_image" class=" form-control-label">Feathured Image</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="file" id="pro_image" name="pro_image" class="form-control-file">
+                                            <small>Single Image</small>
+                                        </div>
+                                        <input type="hidden" name="old_image" value="<%= results[0].image %>">
+                                        <input type="hidden" name="pro_id" value="<%= results[0].pro_id %>">
+                                    </div>
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Product Images</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file">
+                                            <small>Multiple Images  </small>
+                                        </div>
+                                    </div> -->
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"></div>
+                                        <div class="col-12 col-md-9">
+                                            <button type="submit" class="btn btn-primary btn-sm">Save Product</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Manage Tags</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <form action="/myproducts/addtags" method="POST">
+                                    <div class="tags">
+                                        <% if(typeof pro_tags_sql_result != 'undefined') { %>
+                                            <% pro_tags_sql_result.forEach(function(item){ %>
+                                            <div class="this_tag" style="display: block;">
+                                                <label>
+                                                    <span class="badge badge-primary"><%= item.tag_name %></span>
+                                                </label>
+                                                <input type="hidden" name="tag_id" class="tag_id" value="<%= item.id %>">
+                                                <label>
+                                                    <span class="badge badge-danger btn btn-sm delete_tag">x</span>
+                                                </label><br>
+                                            </div>
+                                            <% }); %>
+                                        <% } %>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_image" class="form-control-label">Product Tags</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" name="pro_tags" placeholder="Tags" class="tm-input form-control tm-input-info"/>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="pro_id_for_tag" value="<%= pro_id %>">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"></div>
+                                        <div class="col-12 col-md-9">
+                                            <button type="submit" class="btn btn-primary btn-sm">Save Tags</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- row end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(window).load(function(){
+            $('.delete_tag').click(function(){
+                var tag_id = $(this).parent().parent().children('.tag_id').val();
+                // alert(tag_id);
+
+                // console.log(this);
+                var thisis = $(this);
+                alert('Are You Sure You Want To Delete "Tag"');
+                $.ajax({
+                    type: "POST",
+                    url: "/myproducts/delete_tag/",
+                    data: 'tag_id='+ tag_id,
+                    success: function(result){
+                        // alert(result);
+                        if(result == true){
+                            (thisis).parent().parent().hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- foot end -->
+</body>

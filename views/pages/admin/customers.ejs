@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../../partials/head %>
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Customers</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>User Id</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            
+                                            <th>User Profile</th>
+                                            <th>Status</th>
+                                            <th>Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% results.forEach(function(result, index){ %>
+                                        <tr>
+                                            <td><%= result.id %></td>
+                                            <td><%= result.name %></td>
+                                            <td><%= result.email %></td>
+                                            <td>
+                                                <!-- <button class="btn user_profile" onclick="return confirm('Are you sure you want to Make Him/Her Retailer?')">
+                                                    <input type="hidden" class="user_id" name="user_id" value="<%= result.id %>" >
+                                                </button> -->
+
+                                                <a href="/customers/userprofile/<%= result.id %>" onclick="return confirm('Are you sure you want to Make Him/Her Retailer?')"
+                                                <% if(result.roll_id == 3){ %>
+                                                    class="btn btn-info btn-sm" >Make Retailer
+                                                <% } %>                                                
+                                                </a>                                                 
+                                            </td>
+                                            <td>
+                                                <a href="/customers/status/<%= result.id %>" onclick="return confirm('Are you sure you want to Change?')"
+                                                <% if(result.status == 1){ %>
+                                                    class="btn btn-info btn-sm" >Active
+                                                <% }else{ %>
+                                                    class="btn btn-danger btn-sm" >Deactive
+                                                <% } %>                                                
+                                                </a>                                                 
+                                            </td>
+                                            <td>
+                                                <!-- <a href="/customers/edit/<%= result.id %>" class="btn btn-primary btn-sm" ><i class="fa fa-edit"></i></a> -->
+                                                <a href="/customers/delete/<%= result.id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to DELETE?')"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- row end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(window).load(function(){
+            
+            $(".user_profile").click(function(){
+                var user_id = $(this).children('.user_id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/customers/userprofile",
+                    data: {
+                        id: user_id
+                    },
+                    success: function(result){
+                        console.log(result);
+                        $('#bootstrap-data-tableults tbody').replaceWith($('#bootstrap-data-tableults tbody').html(data));
+                        // $(this).parent().find('tr').css("display", "none");
+                        // $("#bootstrap-data-table").html();
+                        // console.log(result);
+                    }
+                });
+            });
+           
+        });
+    </script>
+    <!-- foot end -->
+</body>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <% include ../../partials/head %>
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/store_header %>
+        <!-- hearer end -->
+
+        <!-- left start -->
+        <% include ../../partials/store_leftpanel %>
+        <!-- left end -->
+
+        <!-- content start -->
+        <div class="content">
+            
+            <div class="animated fadeIn">
+                <div class="row">
+                        <% results.forEach(function(result, index){ %>
+                        <!-- product card 1 start--> 
+                            <p>cart id : <%= result.id %></p><br>
+                            <p><%= result.product_id %></p><br>
+                            <p><%= result.user_id %></p><br>
+                            <p><%= result.quantity_id %></p><br>
+                            <p><%= result.description %></p><br>
+                            <p><%= result.stock %></p><br>
+                            <p><%= result.price %></p><br>
+                        <!-- product card 1 end-->
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    
+    <% include ../../partials/foot %>
+  
+    <!-- foot end -->
+</body>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../../partials/head %>
+    <!-- tags -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>     -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.css">
+
+</head>
+
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/saller_leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/saller_header %>
+
+
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Add Product</strong>
+                            </div>
+
+                            <div class="card-body card-block">
+                                <% if(typeof pro_error != 'undefined') { %>
+                                <% pro_error.forEach(function(pro_val){ %>
+                                <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                                    <%= pro_val.msg %>
+                                </div>
+                                <% }); %>
+                                <% } %>
+                                <form action="/myproducts/addproduct" method="POST" enctype="multipart/form-data" class="form-horizontal formName">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_name" class="form-control-label">Product
+                                                Name</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="pro_name" name="pro_name" placeholder="Product Name"
+                                                class="form-control">
+                                            <p id="pro_name_err" style="color: red;"></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_description" class=" form-control-label">Description</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <textarea name="pro_description" id="pro_description" rows="4" placeholder="Description..."
+                                                class="form-control"></textarea>
+                                            <p id="pro_description_err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="select" class=" form-control-label">Select
+                                                Category</label></div>
+                                        <div class="col-12 col-md-8">
+                                            <select name="cat_id" id="cat_id" class="form-control">
+                                                <option value="0">Please select</option>
+                                                <% results.forEach(function(item){ %>
+                                                <option value="<%= item.id %>">
+                                                    <%= item.name %>
+                                                </option>
+                                                <% }) %>
+                                            </select>
+                                            <p id="cat_id_err" style="color: red;"></p>
+                                        </div>
+                                        <div class="col-12 col-md-1 ">
+                                            <a href="/myproducts/addcategory" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_stock" class=" form-control-label">Available
+                                                Stock</label></div>
+                                        <div class="col-12 col-md-3">
+                                            <input type="number" id="pro_stock" name="pro_stock" placeholder="Product Stock"
+                                                class="form-control">
+                                            <p id="pro_stock_err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_price" class=" form-control-label">Product
+                                                Price</label></div>
+                                        <div class="col-12 col-md-3">
+                                            <input type="number" id="pro_price" name="pro_price" placeholder="Product Price"
+                                                class="form-control">
+                                            <p id="pro_price_err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_image" class=" form-control-label">Feathured
+                                                Image</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="file" id="pro_image" name="pro_image" class="form-control-file"
+                                                required>
+                                            <small>Single Image</small>
+                                            <p id="pro_image_err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="pro_tags" class=" form-control-label">Product
+                                                Tags</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" name="pro_tags" id="pro_tags" placeholder="Tags" class="tm-input form-control tm-input-info" />
+                                            <p id="pro_tags_err" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Product Images</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file">
+                                            <small>Multiple Images  </small>
+                                        </div>
+                                    </div> -->
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"></div>
+                                        <div class="col-12 col-md-9">
+                                            <button type="submit" id="form_submit" class="btn btn-primary btn-sm">Save
+                                                Product</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- row end -->
+
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script type="text/javascript" src="/src/tag.js"></script>
+    <script type="text/javascript">
+        $(".tm-input").tagsManager();
+        $(document).ready(function () {
+
+            // $("select#cat_id").change(function(){
+
+            //     alert(selectedCountry);
+            // });
+
+            $('#form_submit').click(function () {
+                var pro_name = $('#pro_name').val();
+                var pro_description = $('#pro_description').val();
+                var cat_id = $('select#cat_id').children("option:selected").val();
+                var pro_stock = $('#pro_stock').val();
+                var pro_price = $('#pro_price').val();
+                var pro_image = document.getElementById('pro_image').files[0];
+                var pro_tags = $('input:hidden[name=hidden_pro_tags]').val();
+
+                console.log(pro_name);
+                console.log(pro_description);
+                console.log(cat_id);
+                console.log(pro_stock);
+                console.log(pro_price);
+                console.log(pro_image);
+                console.log(pro_tags);
+
+                if (typeof pro_name === 'undefined' || pro_name == null || !pro_name) {
+                    $('#pro_name_err').html('Product Name is require!');
+                }
+
+                if (!pro_description) {
+                    $('#pro_description_err').html('Product Description is require!');
+                }
+
+                if (cat_id <= 0) {
+                    $('#cat_id_err').html('Select Category!');
+                } else {
+                    $('#cat_id_err').hide();
+                }
+
+                if (!pro_stock) {
+                    $('#pro_stock_err').html('Product Stock is require!');
+                }
+
+                if (!pro_price) {
+                    $('#pro_price_err').html('Product Price is require!');
+                }
+
+                if (!pro_image) {
+                    $('#pro_image_err').html('Product Image is require!');
+                }
+
+                if (!pro_tags) {
+                    $('#pro_tags_err').html('Product Tags are require!');
+                }
+            });
+            // product name
+            $('#pro_name').on('keyup', function () {
+                var pro_name = $(this).val();
+                // console.log(pro_name);
+                if (!pro_name) {
+                    $('#pro_name_err').html('Product Name is require!');
+                } else {
+                    $('#pro_name_err').hide();
+                }
+            });
+            
+            // product description
+            $('#pro_description').change(function () {
+                if (!pro_description) {
+                    $('#pro_description_err').html('Product Description is require!');
+                } else {
+                    $('#pro_description_err').hide();
+                }
+            });
+            // select category id
+            $('#select#cat_id').on('input', function () {
+                if (cat_id <= 0) {
+                    $('#cat_id_err').html('Select Category!');
+                } else {
+                    $('#cat_id_err').hide();
+                }
+            });
+            // product stock
+            $('#pro_stock').change(function () {
+                if (!pro_stock) {
+                    $('#pro_stock_err').html('Product Stock is require!');
+                } else {
+                    $('#pro_stock_err').hide();
+                }
+            });
+            // product price
+            $('#pro_price').change(function () {
+                if (!pro_price) {
+                    $('#pro_price_err').html('Product Price is require!');
+                } else {
+                    $('#pro_price_err').hide();
+                }
+            });
+            // product image
+            $('#pro_image').change(function () {
+                if (!pro_image) {
+                    $('#pro_image_err').html('Product Image is require!');
+                } else {
+                    $('#pro_image_err').hide();
+                }
+            });
+            // product tag
+            $('#pro_tags').on('input', function () {
+                if (!pro_tags) {
+                    $('#pro_tags_err').html('Product Tags are require!');
+                    alert('yes');
+                } else {
+                    $('#pro_tags_err').hide();
+                    // alert('no');
+                }
+            });
+        });
+    </script>
+
+    <!-- foot end -->
+</body>

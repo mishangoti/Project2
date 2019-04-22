@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/head %> 
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                
+                <!--  Traffic  -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">Live Chat</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="panel-body">
+                                    <ul class="messages">
+                                        
+                                    </ul>
+                                    <!-- <form>
+                                        <div class="form-group">
+                                            <span class="label label-default pb-chat-labels pb-chat-labels-left">Hi, how are you?</span>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pull-right pb-chat-labels-right">
+                                            <span class="label label-primary pb-chat-labels pb-chat-labels-primary">Hi, i'm fine, you?</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <span class="label label-default pb-chat-labels pb-chat-labels-left">I'm great, wanna hangout?</span>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pull-right pb-chat-labels-right">
+                                            <span class="label label-primary pb-chat-labels pb-chat-labels-primary">No, huehuehue</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr>
+                                        <div class="form-group pull-right pb-chat-labels-right">
+                                            <span class="label label-primary pb-chat-labels pb-chat-labels-primary">I'm busy hanging out :D</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </form> -->
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <textarea name="textarea-input" id="m" rows="2" placeholder="Message..." class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-2" style="padding-top:4%;">
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" id="send_message"><span class="fa fa-chevron-right"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">Traffic </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card-body">
+                                        <!-- <canvas id="TrafficChart"></canvas>   -->
+                                        <a href="/dashboard/cron_job" class="btn btn-primary btn-sm cron_job">cron_job</a>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-6">
+                                    <div class="card-body">
+                                        <div class="progress-box progress-1">
+                                            <h4 class="por-title">Visits</h4>
+                                            <div class="por-txt">96,930 Users (40%)</div>
+                                            <div class="progress mb-2" style="height: 5px;">
+                                                <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-box progress-2">
+                                            <h4 class="por-title">Bounce Rate</h4>
+                                            <div class="por-txt">3,220 Users (24%)</div>
+                                            <div class="progress mb-2" style="height: 5px;">
+                                                <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: 24%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-box progress-2">
+                                            <h4 class="por-title">Unique Visitors</h4>
+                                            <div class="por-txt">29,658 Users (60%)</div>
+                                            <div class="progress mb-2" style="height: 5px;">
+                                                <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="progress-box progress-2">
+                                            <h4 class="por-title">Targeted  Visitors</h4>
+                                            <div class="por-txt">99,658 Users (90%)</div>
+                                            <div class="progress mb-2" style="height: 5px;">
+                                                <div class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /.card-body -->
+                                </div>
+                            </div> <!-- /.row -->
+                            <div class="card-body"></div>
+                        </div>
+                    </div><!-- /# column -->
+                </div>
+                <!--  /Traffic -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+
+    
+    <!-- foot end -->
+</body>

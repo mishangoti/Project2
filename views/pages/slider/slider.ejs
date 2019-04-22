@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../../partials/head %>
+  <style>
+    /* body { overflow: hidden; } */
+    h1 {text-align:center;}
+    #lightbox {width: auto;}
+    #gallery img { width: 400px; height: 250px; }
+</style>
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+                <div id="gallery">
+                    <%  var sr = 1
+                        results.forEach(function(result, index){ %>
+                        <a href="../<%= result.image %>" class="gal_link"><img src="../<%= result.image %>"></a>
+                    <% sr++; }); %>           
+                </div>
+                <!-- row end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+   
+    <!-- foot end -->
+</body>

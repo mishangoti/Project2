@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../../partials/head %>
+    <style>
+        .center{
+            text-align: center;
+            font-size: 25px;
+        }
+        .red{
+            color: brown;
+        }
+        .green{
+            color: darkgreen;
+        }
+        .back-red{
+            color: white;
+            background-color: brown;
+        }
+        .cancel_order:hover{
+            color: brown;
+        }
+        .return_order:hover{
+            color: brown;            
+        }
+        .view_order:hover{
+            color: blue;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- leftpanel start -->
+    <!-- <aside id="left-panel" class="left-panel">
+        <div class="orders">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Track</h4>
+                        </div>
+                        <div class="card-body--">
+                            Orders
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside> -->
+    <!-- leftpanel end -->
+    
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/store_header %>
+        <!-- hearer end -->
+        
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="animated fadeIn">
+                    <div class="orders">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- <a class="btn btn-info btn-sm" href="/track">On Process Order</a>
+                                    <a class="btn btn-info btn-sm" href="/track/history">Old Orders</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- orders start -->
+                <% if(typeof payment_status_result != 'undefined'){ %>
+                <% payment_status_result.forEach(function(item, index){ %>
+                <div class="orders">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">Order : <%= item.order_slot_num %></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-2 center">
+                                        <p>Order Process</p>
+                                        <% if(item.payment_status == 1){ %>
+                                            <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                                        <% } else { %>
+                                            <i class="fa fa-dot-circle red" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-2 center">
+                                        
+                                        <% if(item.payment_status == 1){ %>
+                                            <p>Payment</p>
+                                            <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                                        <% } else { %>
+                                            <i class="fa fa-dot-circle red" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-2 center">
+                                        <p>Pre-processing</p>
+                                        <% if(item.pre_process_status == 1){ %>
+                                            <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                                        <% } else if(item.pre_process_status == 0){ %>
+                                            <i class="fa fa-dot-circle red" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-2 center">
+                                        <% if(item.dispatch_status == 1){ %>
+                                            <p>Shipped</p>
+                                            <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                                        <% } else if(item.dispatch_status == 0){ %>
+                                            <p>Waiting</p>
+                                            <i class="fa fa-dot-circle red" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-2 center">
+                                        <% if(item.order_status == 1){ %>
+                                            <p>Waiting</p>
+                                            <i class="fa fa-dot-circle red" aria-hidden="true"></i>
+                                        <% } else if(item.order_status == 2){ %>
+                                            <p>Deliverd</p>
+                                            <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                                        <% } else if(item.order_status == 3){ %>
+                                            <p>Cancel</p>
+                                            <i class="fa fa-times-circle red" aria-hidden="true"></i>
+                                        <% } else if(item.order_status == 3){ %>
+                                            <p>Return</p>
+                                            <i class="fa fa-times-circle red" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="row justify-content-center">
+                                            <div class="table-stats order-table ov-h pro_data">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="serial">#</th>
+                                                            <th class="avatar">Product Image</th>
+                                                            <th>Product ID</th>
+                                                            <th>Name</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Product Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <input type="hidden" name="order_slot_num_show" value="<%= item.order_slot_num %>" class="show_pro_box">
+                                            <button class="btn btn-sm view_order">View My Product</a>                                 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row justify-content-center">
+                                            <% if(item.order_status == 2){ %>        
+                                                <input type="hidden" name="order_slot_num_return" value="<%= item.order_slot_num %>" class="return_box">
+                                                <button class="btn btn-sm return_order" onclick="return confirm('Are you sure you want to Return?')">Return Order</a>
+                                            <% } else { %>
+                                                <input type="hidden" name="order_slot_num_cancel" value="<%= item.order_slot_num %>" class="cancel_box">
+                                                <button class="btn btn-sm cancel_order" onclick="return confirm('Are you sure you want to Delete?')">Cancel Order</a>  
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- /.card -->
+                    </div>  <!-- /.col-lg-8 -->
+                </div>
+                <% }); %>
+                <% } else { %>
+                    <div class="orders">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="box-title">Order : </h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>You Haven't Order Anything</p>
+                                </div>
+                            </div>                
+                        </div>                
+                    </div>                
+                <% } %>
+                <!-- orders end -->
+            </div>
+           
+        </div>
+        <!-- content end -->
+
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(window).load(function() {
+            // var total = 0;
+            $(".view_order").click(function(){
+                var order_slot_num_show = $(this).siblings('.show_pro_box').val();
+                alert(order_slot_num_show);
+                var thisis = $(this);
+                $.ajax({
+                    url: "/track/showproduct",
+                    type: 'POST',
+                    data: 'order_slot_num_show='+ order_slot_num_show,
+                    success: function(result){
+                        // alert(result);
+                        var output = [];
+                        var sr = 1;
+                        result.forEach(element => {
+                            var sub_total = 0;
+                            var pro_total = element.quantity * element.price;
+                            sub_total = sub_total + pro_total;
+                            output += '<tr><td class="serial">'
+                                    + sr+'.'
+                                    + '</td><td class="avatar">'
+                                    + '<div class="round-img">'
+                                    +    '<a href="#"><img class="squar-circle" src="'+element.image+'" alt=""></a>'
+                                    + '</div>'
+                                    + '</td><td>'
+                                    + element.c_product_id
+                                    + '</td><td>'
+                                    + element.p_name
+                                    + '</td><td>'
+                                    + '$'+element.price
+                                    + '</td><td>'
+                                    + element.quantity
+                                    + '</td><td>'
+                                    + '$'+pro_total
+                                    + '</td></tr>';
+                            sr++;
+                            
+                        });
+                        // console.log(output);
+                        $(thisis).siblings('.pro_data').children().find('tbody').html(output);
+                        setTimeout(function(){
+                            $(thisis).siblings('.pro_data').children().find('tbody').toggle("slide");
+                        },2000);
+                        
+                    },
+                    error: function(err){
+                        console.log('ajax error : '+err);
+                    }
+                    
+                });
+                
+                // location.reload(true);
+            });
+            // $(".quantity").focusout(function(){
+            //     var price = $(this).parent().parent('tr').find('.price').text();
+            //     var cart_id = $(this).siblings('.cart_id').val();
+            //     var quantity = $(this).val();
+            //     var pro_total = quantity * price;
+            //     total = total + pro_total;
+            //     $(this).parent().parent('tr').find('.total_price').text('$'+pro_total);
+
+            //     $.ajax({
+            //         url: "/store/updatecart",
+            //         type: 'POST',
+            //         data: { cart_id : cart_id, quantity: quantity },
+            //         success: function(result){
+            //             // alert('quantity updated');
+            //             console.log(result);
+            //         },
+            //         error: function(err){
+            //             console.log('ajax error : '+err);
+            //         }
+            //     });
+            //     location.reload(true);
+            // });
+        });
+        var total = 0;
+       
+                   
+        // console.log(total);
+    </script>
+    <!-- foot end -->
+</body>

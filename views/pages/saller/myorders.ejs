@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/head %> 
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/saller_leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/saller_header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+                <div class="animated fadeIn">
+                    <!-- row start -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Categorys</strong>
+                                    <!-- <a href="/categorys/addcategory" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i></a> -->
+                                </div>
+                                <div class="card-body">
+                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>Order Slot Num</th>
+                                                <th>Buyer Id</th>
+                                                <th>Contact Name</th>
+                                                <th>Contact Number</th>
+                                                <th>Address</th>
+                                                <th>State</th>
+                                                <th>Zipcode</th>
+                                                <th>Product Id</th>
+                                                <th>Product Name</th>
+                                                <th>Product Quantity</th>
+                                                <th>Product Price</th>
+                                                <th>Payment Mathod</th>
+                                                <th>Payment Status</th>
+                                                <th>Preprocess Status</th>
+                                                <th>Dispatch Status</th>
+                                                <th>Dispatch Time</th>
+                                                <th>Order Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="order_list">
+                                            <% results.forEach(function(item){ %>
+                                            <tr>   
+                                                <td><%= item.order_slot %></td>
+                                                <td><%= item.buyer_id %></td>
+                                                <td><%= item.address_name %></td>
+                                                <td><%= item.address_number %></td>
+                                                <td><%= item.address_address %></td>
+                                                <td><%= item.address_state %></td>
+                                                <td><%= item.address_zipcode %></td>
+                                                <td><%= item.product_id %></td>
+                                                <td><%= item.product_name %></td>
+                                                <td><%= item.product_quantity %></td>
+                                                <td><%= item.product_price %></td>
+                                                <td><%= item.order_payment_method %></td>
+                                                <td>
+                                                    <% if(item.order_payment_status == 1){ %>
+                                                        <button class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i></button>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(item.order_pre_process_status == 0){ %>
+                                                        <input type="hidden" name="order_slot_num" class="slot_num" value="<%= item.order_slot %>">
+                                                        <button class="btn btn-danger btn-sm pre_process" style="display: block;">Pending</button>
+                                                        <label class="badge badge-success btn btn-sm cat_labels pre_process_show" style="display: none;">Done</label>
+                                                    <% }else if(item.order_pre_process_status == 1){ %>
+                                                        <label class="badge badge-success btn btn-sm cat_labels">Done</label>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(item.order_dispatch_status == 0){ %>
+                                                        <input type="hidden" name="order_slot_num" class="slot_num" value="<%= item.order_slot %>">
+                                                        <button class="btn btn-danger btn-sm dispatch">Pending</button>
+                                                        <label class="badge badge-success btn btn-sm cat_labels dispatch_show" style="display: none;">Despathced</label>
+                                                    <% }else if(item.order_dispatch_status == 1){ %>
+                                                        <label class="badge badge-success btn btn-sm cat_labels">Despathced</label>
+                                                    <% } %>
+                                                </td>
+                                                <td><%= item.order_dispatch_time %></td>
+                                                <td>
+                                                    <% if(item.order_order_status == 1){ %>
+                                                        <input type="hidden" name="order_slot_num" class="slot_num" value="<%= item.order_slot %>">                                                        
+                                                        <button class="btn btn-danger btn-sm order_status">Pending</button>
+                                                        <label class="badge badge-success btn btn-sm cat_labels order_status_show" style="display: none;">Delivered</label>
+                                                    <% }else if(item.order_order_status == 2){ %>
+                                                        <label class="badge badge-success btn btn-sm cat_labels">Delivered</label>
+                                                    <% }else if(item.order_order_status == 3){ %>
+                                                        <label class="badge badge-danger btn btn-sm cat_labels">Cancel</label>
+                                                    <% }else if(item.order_order_status == 4){ %>
+                                                        <label class="badge badge-danger btn btn-sm cat_labels">Return</label>
+                                                    <% } %>
+                                                </td>
+                                               
+                                            </tr>
+                                            <% }) %>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- row end -->
+                </div>
+            </div>
+            <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(document).ready(function(){
+            // alert();
+            $(document).on('click', '.pre_process', function(){
+                var order_slot_num = $(this).parent().find('.slot_num').val();
+                // alert(status + " : " + order_slot_num);
+                var thisis = $(this);
+                alert('Pre Precess Of Product Is Done ??');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/myorders/update_preprocess_status/",
+                    data: {status: status, order_slot_num: order_slot_num },
+                    success: function(result){
+                        // alert(result);
+                        if(result == true){
+                            (thisis).parent().find('.pre_process').hide();
+                            (thisis).parent().find('.pre_process_show').show();
+                            // alert('yes');
+                        }
+                    }
+                });
+            }); 
+            $(document).on('click', '.dispatch', function(){
+                var order_slot_num = $(this).parent().find('.slot_num').val();
+                var thisis = $(this);
+                alert('Product Is Dispatch ??');
+                $.ajax({
+                    type: "POST",
+                    url: "/myorders/update_dispatch_status/",
+                    data: 'order_slot_num='+ order_slot_num,
+                    success: function(result){
+                        // alert(result);
+                        if(result == true){
+                            (thisis).parent().find('.dispatch').hide();
+                            (thisis).parent().find('.dispatch_show').show();
+                            // alert('yes');
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.order_status', function(){
+                var order_slot_num = $(this).parent().find('.slot_num').val();
+                var thisis = $(this);
+                // alert(order_slot_num);
+                alert('Product Is Dispatch ??');
+                $.ajax({
+                    type: "POST",
+                    url: "/myorders/update_order_status/",
+                    data: 'order_slot_num='+ order_slot_num,
+                    success: function(result){
+                        // alert(result);
+                        if(result == true){
+                            (thisis).parent().find('.order_status').hide();
+                            (thisis).parent().find('.order_status_show').show();
+                            // alert('yes');
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+    <!-- foot end -->
+</body>

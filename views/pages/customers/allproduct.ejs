@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <% include ../../partials/head %>
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/store_header %>
+        <!-- hearer end -->
+
+        <!-- left start -->
+        <% include ../../partials/store_leftpanel %>
+        <!-- left end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    
+                    <% products.forEach(function(result, index){ %>
+                    <!-- product card 1 start--> 
+                    <div class="col-md-3">
+                        <div class="card">
+                            <a href="#">
+                                <img class="card-img-top" src="<%= result.image %>" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-3"><%= result.name %></h4>
+                                    <p class="card-text"><%= result.description %></p>
+                                </div>
+                                <a href="#" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Add To Cart</a>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- product card 1 end-->
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <!-- foot end -->
+</body>

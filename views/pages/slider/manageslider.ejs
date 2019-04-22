@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../../partials/head %>
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- order start -->
+                <div class="orders">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="box-title">Images </h4>
+                                </div>
+                                <div class="card-body--">
+                                    <div class="table-stats order-table ov-h">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th class="serial">#</th>
+                                                    <th class="avatar">Images</th>
+                                                    <th>Status</th>
+                                                    <th>Options</th>                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% var sr = 1 %>
+                                                <% results.forEach(function(result, index){ %>
+                                                    <tr>
+                                                        <td><%= sr %></td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="<%= result.image %>" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" id="img_id" value="<%= result.id %>">
+                                                            <button class="btn <% if(result.status){ %>
+                                                                btn-danger btn-sm act_deact">Deactive
+                                                            <% } else { %>
+                                                                btn-primary btn-sm act_deact">Active                                                          
+                                                            <% } %></button>
+                                                        </td>
+                                                        <td>
+                                                            <!-- <a href="/manageslider/edit/<%= result.id %>"><span class="badge badge-info"><i class="fa fa-edit"></i></span></a>                                                         -->
+                                                            <a href="/manageslider/delete/<%= result.id %>"><span class="badge badge-danger" onclick="return confirm('Are you sure you want to DELETE?')"><i class="fa fa-trash"></i></span></a>
+                                                        </td>
+                                                    </tr>
+                                                <% sr++; }); %>           
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- /.table-stats -->
+                                </div>
+                            </div> <!-- /.card -->
+                        </div>  <!-- /.col-lg-8 -->
+
+                        <div class="col-xl-6">
+                            <div class="col-lg-6 col-xl-12">
+                                <div class="card br-0">
+                                    <div class="card-body">
+                                        <h4 class="box-title">Add Images</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/manageslider" enctype="multipart/form-data" method="POST">
+                                            <div class="form-group">
+                                                <label for="">Image</label>
+                                                <input type="file" class="form-control" name="image">
+                                            </div>
+                                            <button type="submit" class="btn btn-info btn-sm">Add</button>
+                                        </form>
+                                    </div>
+                                </div><!-- /.card -->
+                            </div>
+                        </div> <!-- /.col-md-4 -->
+                    </div>
+                </div>
+                <!-- order end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <script>
+        $(document).ready(function(){
+            $('.act_deact').click(function(){
+                var id = $(this).find('#img_id').val();
+                alert(id);
+            });
+        });
+    </script>
+    <!-- foot end -->
+</body>

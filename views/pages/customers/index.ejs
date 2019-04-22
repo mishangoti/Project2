@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <% include ../../partials/head %>
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/store_header %>
+        <!-- hearer end -->
+
+        <!-- left start -->
+        <% include ../../partials/store_leftpanel %>
+        <!-- left end -->
+
+        <!-- content start -->
+        <div class="content">
+            <!-- end -->
+            
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <form action="/store/" method="POST">
+                    <input type="text" class="form-control" id="searchbox" name="searchbox" placeholder="Search &hellip;"><br>
+                </div>
+                <div class="com-md-2">
+                    <button class="btn btn-warning" id="searchbox_btn">Search</button>
+                </form>
+                </div>       
+            </div><hr>
+            <% include ../../partials/messages %>
+            <div class="animated fadeIn">
+                <div class="row searchbox_filter" id="filter_cat">
+                        <% results.forEach(function(result, index){ %>
+                        <!-- product card 1 start--> 
+                        <div class="col-md-3 cat_<%= result.cat_id %>">
+                            <div class="card">
+                                <a href="#">
+                                    <img class="card-img-top" src="../<%= result.pro_image %>" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-3"><%= result.pro_name %></h4>
+                                        <p><b>only : </b>$ <%= result.pro_price %></p>
+                                        <p><b>Avilable : </b><%= result.pro_stock %></p>
+                                        <p><b>Category : </b><%= result.cat_name %></p>
+                                        <!-- <p class="card-text"><%= result.pro_description %></p> -->
+                                    </div>
+                                    <a href="/store/addtocart/<%= result.pro_id %>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Add To Cart</a>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- product card 1 end-->
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    
+    <% include ../../partials/foot %>
+    <script>
+
+        // $(document).ready(function(){
+        //     $('#searchbox_btn').click(function(){
+        //         var keyword = $('#searchbox').val();
+        //         alert(keyword);
+        //         if(keyword){
+        //             // alert('it has values');
+        //             $.ajax({
+        //                 type: "POST",
+        //                 url: "/store/",
+        //                 data: 'keyword='+ keyword
+        //             });
+        //         } else {
+        //             alert('Write Some Keyword To Search Product');
+        //         }
+        //     });
+        // });
+
+        $(window).load(function() {
+            // alert();
+            var $btns = $('.cat_labels').click(function() {
+                if (this.id == 'all') {
+                    $('#filter_cat > div').fadeIn(450);
+                } else {
+                    var $el = $('.' + this.id).fadeIn(450);
+                    $('#filter_cat > div').not($el).hide();
+                }
+                $btns.removeClass('active');
+                $(this).addClass('active');
+            });
+           
+            // $("body").on('keyup','#searchbox',function(e){
+            //     e.preventDefault();
+            //     var txt=$('#searchbox').val();
+            //     var regEx = new RegExp($.map($(this).val().trim().split(' '), function(v) {
+            //         return '(?=.*?' + v + ')';
+            //     }).join(''), 'i');
+
+            //     // console.log(txt);
+            //     $('.searchbox_filter').hide().filter(function() {
+            //         return regEx.exec($(this).text());
+            //     }).show();
+            // });
+
+            // $("body").on('click','#searchbox_btn',function(e){
+            //     e.preventDefault();
+            //     var txt=$('#searchbox').val();
+            //     alert(txt);
+                
+            //     // select * from table where pro_tags like xyz
+                
+            // });
+        
+        });
+        
+    </script>
+    <!-- foot end -->
+</body>

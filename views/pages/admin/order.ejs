@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../../partials/head %>
+
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Orders</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>User Id</th>
+                                            <th>Email</th>
+                                            <th>Contact Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Address</th>
+                                            <th>State</th>
+                                            <th>Zipcode</th>
+                                            <th>Product Id</th>
+                                            <th>Product Name</th>
+                                            <th>Product Price</th>
+                                            <th>Product Quantity</th>
+                                            <th>Payment Mathod</th>
+                                            <th>Payment Status</th>
+                                            <th>Dispatch Status</th>
+                                            <th>Order Status</th>
+                                            <th>Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% results.forEach(function(item){ %>
+                                        <tr>
+                                            <td><%= item.id %></td>
+                                            <td><%= item.user_id %></td>
+                                            <td><%= item.email %></td>
+                                            <td><%= item.contact_name %></td>
+                                            <td><%= item.contact_number %></td>
+                                            <td><%= item.address %></td>
+                                            <td><%= item.state %></td>
+                                            <td><%= item.zip_code %></td>
+                                            <td><%= item.product_id %></td>
+                                            <td><%= item.name %></td>
+                                            <td><%= item.price %></td>
+                                            <td><%= item.quantity %></td>
+                                            <td><%= item.payment_id %></td>
+                                            <td><%= item.payment_status %></td>
+                                            <td><%= item.dispatch_status %></td>
+                                            <td><%= item.status %></td>
+                                            <td>
+                                                <a href="/categorys/edit/" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a href="/categorys/delete/" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to DELETE?')"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% })%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- row end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+    <!-- foot end -->
+</body>

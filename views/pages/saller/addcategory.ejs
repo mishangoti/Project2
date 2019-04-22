@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/head %> 
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/saller_leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/saller_header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+            <div class="animated fadeIn">
+                <!-- row start -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <% if(success_msg){ %>
+                            <%= success_msg %>
+                        <% } %>
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Add Category</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <form action="/myproducts/addcategory" method="POST" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="cat_name" class="form-control-label">Category Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="cat_name" name="cat_name" placeholder="Category Name" class="form-control" required></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="cat_description" class="form-control-label">Description</label></div>
+                                        <div class="col-12 col-md-9"><textarea name="cat_description" id="cat_description" rows="4" placeholder="Description..." class="form-control" required></textarea></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"></div>
+                                        <div class="col-12 col-md-9">
+                                            <button type="submit" class="btn btn-primary btn-sm">Save Category</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- row end -->
+            </div>
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+
+    <!-- foot end -->
+</body>

@@ -1,0 +1,99 @@
+<!-- Left Panel -->
+<link rel="stylesheet" type="text/css" href="/stylesheets/filter/stream.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/jquery-ui-1.10.2.custom.min.css">
+
+
+<aside id="left-panel" class="left-panel">
+    <!-- <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li class="menu-title">Categorys</li>
+                
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Categorys</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <% category.forEach(function(item, index){ %>
+                            <li>
+                                <input type="hidden" class="category_id" value="<%= item.name %>">
+                                <a class="btn category_filter"><%= item.name %></a> -->
+                                <!-- <a href="/store/category/<%= item.name %>"><%= item.name %></a> -->
+                            <!-- </li>
+                        <% }); %>   
+                    </ul>
+                </li>
+                    
+            </ul> -->
+        <!-- </div>/.navbar-collapse -->
+    <!-- </nav> -->
+
+        <div class="container">
+            <div class="sidebar col-md-12">
+            <!-- <div>
+                <h4 class='col-md-6'>Movies (<span id="total_movies">0</span>)</h4>
+                <div class="col-md-6 progress">
+                <div class="progress-bar" id="stream_progress" style="width: 0%;">0%</div>
+                </div>
+            </div> -->
+            
+            <br>
+                <!-- <div class="well">
+                    <fieldset id="rating_criteria">
+                    <legend>Rating</legend> <span id="rating_range_label" class="slider-label">8 - 10</span>
+                    <div id="rating_slider" class="slider">
+                    </div>
+                    <input type="hidden" id="rating_filter" value="8-10">
+                    </fieldset>
+                </div> -->
+            <!-- <div class="well">
+                <fieldset id="runtime_criteria">
+                <legend>Runtime</legend> <span id="runtime_range_label" class="slider-label">50 mins - 250 mins</span>
+                <div id="runtime_slider" class="slider">
+                </div>
+                <input type="hidden" id="runtime_filter" value="50-250">
+                </fieldset>
+            </div>
+            <div class="well">
+                <fieldset id="year_criteria">
+                <legend>Year</legend>
+                <select class="form-control" id="year_filter">
+                    <option value="all">All (1920 - 2020)</option>
+                    <option value="1920-1930">1920 - 1930</option>
+                    <option value="1931-1940">1931 - 1940</option>
+                    <option value="1941-1950">1941 - 1950</option>
+                    <option value="1951-1960">1951 - 1960</option>
+                    <option value="1961-1970">1961 - 1970</option>
+                    <option value="1971-1980">1971 - 1980</option>
+                    <option value="1981-1990">1981 - 1990</option>
+                    <option value="1991-2000">1991 - 2000</option>
+                    <option value="2001-2010">2001 - 2010</option>
+                    <option value="2011-2020">2011 - 2020</option>
+                </select>
+                </fieldset>
+            </div> -->
+                <div class="well">
+                    <fieldset id="genre_criteria">
+                    <legend>Category</legend>
+                    <div class="checkbox">
+                        <label>
+                            <span class="badge badge-primary btn btn-sm" id="all">All</span>
+                        </label>
+                    </div>
+                    <% if(typeof category != 'undefined') { %>
+                        <% category.forEach(function(item, index){ %>
+                            <label>
+                                <span class="badge badge-primary btn btn-sm cat_labels" id="cat_<%= item.id %>"><%= item.name %></span>
+                                <!-- <button class="btn btn-info btn-sm" id="cat_<%= item.id %>"><%= item.name %></button> -->
+                            </label>
+                        <% }); %>
+                    <% } %>
+                    </fieldset>
+                </div>
+            </div>
+    
+            <!-- <div class="col-md-9">
+            <div class="movies content row" id="movies"> </div>
+            </div> -->
+    </div>
+</aside>
+<!-- /#left-panel -->

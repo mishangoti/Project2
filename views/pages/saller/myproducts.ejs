@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/head %> 
+</head>
+<body>
+    <!-- leftpanel start -->
+    <% include ../../partials/saller_leftpanel %>
+    <!-- leftpanel end -->
+    <div id="right-panel" class="right-panel">
+        <!-- header start -->
+        <% include ../../partials/saller_header %>
+        <!-- hearer end -->
+
+        <!-- content start -->
+        <div class="content">
+                <div class="animated fadeIn">
+                    <!-- row start -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">My Products</strong>
+                                    <a href="/myproducts/addproduct" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Product Id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Category Id</th>
+                                                <th>Category Name</th>
+                                                <th>Stock</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                                <% results.forEach(function(item){ %>
+                                                <tr>   
+                                                    <td><%= item.pro_id %></td>
+                                                    <td><%= item.pro_name %></td>
+                                                    <td><%= item.description %></td>
+                                                    <td><%= item.category_id %></td>
+                                                    <td><%= item.cat_name %></td>
+                                                    <td><%= item.stock %></td>
+                                                    <td><%= item.price %></td>
+                                                    <td>
+                                                        <a href="/myproducts/status/<%= item.pro_id %>" onclick="return confirm('Are you sure you want to Change?')"
+                                                            <% if(item.pro_status == 1){ %>
+                                                                class="btn btn-info btn-sm" >Deactive
+                                                            <% }else{ %>
+                                                                class="btn btn-danger btn-sm" >Active
+                                                            <% } %>
+                                                        </a>      
+                                                    </td>
+                                                    <td>
+                                                        <a href="/myproducts/edit/<%= item.pro_id %>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                                        <a href="/myproducts/delete/<%= item.pro_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to DELETE?')"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- row end -->
+                </div>
+            </div>
+            <!-- content end -->
+    </div>
+    <!-- foot start -->
+    <!-- foot has only js -->
+    <% include ../../partials/foot %>
+   
+
+    <!-- foot end -->
+</body>
